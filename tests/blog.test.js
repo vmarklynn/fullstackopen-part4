@@ -79,4 +79,22 @@ describe("total likes", () => {
     const result = listHelper.totalLikes(blogs);
     expect(result).toBe(36);
   });
+
+  test("most likes with a single blog should return that blog", () => {
+    const result = listHelper.favoriteBlog(listWithOneBlog);
+    console.log(result);
+  });
+
+  test("most likes with multiple blog should return blog with most likes", () => {
+    const mostLikes = {
+      _id: "5a422b3a1b54a676234d17f9",
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+      likes: 12,
+      __v: 0,
+    };
+    const result = listHelper.favoriteBlog(blogs);
+    expect(result).toEqual(mostLikes);
+  });
 });

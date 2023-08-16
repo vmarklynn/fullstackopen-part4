@@ -105,6 +105,6 @@ describe("total likes", () => {
 
   test("Most likes should return author with most likes", () => {
     const result = listHelper.mostLikes(blogs);
-    console.log(result);
+    expect(result).toEqual({ author: "Edsger W. Dijkstra", likes: 17 });
   });
 });

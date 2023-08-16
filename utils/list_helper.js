@@ -37,11 +37,19 @@ const mostBlogs = (blogs) => {
 
 const mostLikes = (blogs) => {
   const likeCount = blogs.reduce((frequency, blog) => {
-    frequency[blog.author] = frequency[blog.author] += blog.likes || blog.likes;
+    frequency[blog.author] = frequency[blog.author] + blog.likes || blog.likes;
     return frequency;
   }, {});
 
-  return likeCount;
+  const iterable = Object.entries(likeCount).map((blogger) => ({
+    author: blogger[0],
+    likes: blogger[1],
+  }));
+
+  const top = iterable.reduce((prev, curr) => {
+    return prev.likes >= curr.likes ? prev : curr;
+  });
+  return top;
 };
 
 module.exports = {

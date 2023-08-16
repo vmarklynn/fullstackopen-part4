@@ -86,7 +86,7 @@ describe("total likes", () => {
   });
 
   test("most likes with multiple blog should return blog with most likes", () => {
-    const mostLikes = {
+    const favorite = {
       _id: "5a422b3a1b54a676234d17f9",
       title: "Canonical string reduction",
       author: "Edsger W. Dijkstra",
@@ -95,6 +95,16 @@ describe("total likes", () => {
       __v: 0,
     };
     const result = listHelper.favoriteBlog(blogs);
-    expect(result).toEqual(mostLikes);
+    expect(result).toEqual(favorite);
+  });
+
+  test("Most blogs should return author with most blogs", () => {
+    const result = listHelper.mostBlogs(blogs);
+    expect(result).toEqual({ author: "Robert C. Martin", blogs: 3 });
+  });
+
+  test("Most likes should return author with most likes", () => {
+    const result = listHelper.mostLikes(blogs);
+    console.log(result);
   });
 });

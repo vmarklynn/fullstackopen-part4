@@ -35,6 +35,28 @@ test("Test id is defined", async () => {
   });
 });
 
+test("Test post", async () => {
+  const newBlog = {
+    title: "Software Developers are working too much.",
+    author: "J. Blake",
+    url: "www.jblock.com",
+    likes: 200,
+  };
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+
+  const blogsAfterPost = await helper.blogsFromDb();
+  console.log(typeof blogsAfterPost);
+  expect(blogsAfterPost).toHaveLength(helper.initialBlogs.length + 1);
+
+  const titles = blogsAfterPost.map((blog) => blog.title);
+  expect(titles).toContain("Software Developers are working too much.");
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

@@ -28,6 +28,13 @@ test("Test all notes are returned", async () => {
   expect(response.body).toHaveLength(helper.initialBlogs.length);
 });
 
+test("Test id is defined", async () => {
+  const blogs = await Blog.find({});
+  blogs.forEach((blog) => {
+    expect(blog.id).toBeDefined();
+  });
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

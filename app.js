@@ -5,6 +5,7 @@ const cors = require("cors");
 const logger = require("./utils/logger");
 const mongoose = require("mongoose");
 
+require("express-async-errors");
 const blogRouter = require("./controllers/blogs");
 const middleware = require("./utils/middleware");
 

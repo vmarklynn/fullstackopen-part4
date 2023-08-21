@@ -57,6 +57,20 @@ test("Test post", async () => {
   expect(titles).toContain("Software Developers are working too much.");
 });
 
+test("Test post without likes will default to 0", async () => {
+  const newBlog = {
+    title: "Software Developers are working too much.",
+    author: "J. Blake",
+    url: "www.jblock.com",
+  };
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

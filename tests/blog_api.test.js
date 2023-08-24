@@ -106,6 +106,29 @@ describe("DELETE tests", () => {
   });
 });
 
+describe("PUT tests", () => {
+  test("Test update with valid id", async () => {
+    const blogs = await helper.blogsFromDb();
+
+    const blogToUpdate = blogs[0];
+
+    console.log(blogToUpdate);
+
+    const newBlog = {
+      blogToUpdate,
+      likes: 2000,
+    };
+
+    await api.put(`/api/blogs/${blogToUpdate.id}`).send(newBlog).expect(200);
+
+    const blogsAtEnd = await helper.blogsFromDb();
+
+    const likes = blogsAtEnd.map((blog) => blog.likes);
+
+    expect(likes).toContain(2000);
+  });
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

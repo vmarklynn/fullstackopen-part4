@@ -94,6 +94,18 @@ describe("Verify validations and default values", () => {
   });
 });
 
+describe("DELETE tests", () => {
+  test("Test delete with valid id", async () => {
+    const validId = "5a422a851b54a676234d17f7";
+
+    await api.delete(`/api/blogs/${validId}`).expect(204);
+
+    const blogsAtEnd = await helper.blogsFromDb();
+
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length - 1);
+  });
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

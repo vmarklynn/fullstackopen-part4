@@ -84,6 +84,15 @@ test("Test blog without title will return 400", async () => {
   await api.post("/api/blogs").send(newBlogWoutTitle).expect(400);
 });
 
+test("Test blog without url will return 400", async () => {
+  const newBlogWoutUrl = {
+    title: "How to win friends and alienate people",
+    author: "Jack Bean",
+  };
+
+  await api.post("/api/blogs").send(newBlogWoutUrl).expect(400);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

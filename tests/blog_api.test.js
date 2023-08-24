@@ -50,7 +50,6 @@ test("Test post", async () => {
     .expect("Content-Type", /application\/json/);
 
   const blogsAfterPost = await helper.blogsFromDb();
-  console.log(typeof blogsAfterPost);
   expect(blogsAfterPost).toHaveLength(helper.initialBlogs.length + 1);
 
   const titles = blogsAfterPost.map((blog) => blog.title);
@@ -69,6 +68,11 @@ test("Test post without likes will default to 0", async () => {
     .send(newBlog)
     .expect(201)
     .expect("Content-Type", /application\/json/);
+
+  const blogsAfterPost = await helper.blogsFromDb();
+  const likes = blogsAfterPost.map((blog) => blog.likes);
+
+  expect(likes).toContain(0);
 });
 
 afterAll(async () => {

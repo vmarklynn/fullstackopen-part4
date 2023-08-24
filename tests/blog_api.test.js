@@ -75,6 +75,15 @@ test("Test post without likes will default to 0", async () => {
   expect(likes).toContain(0);
 });
 
+test("Test blog without title will return 400", async () => {
+  const newBlogWoutTitle = {
+    author: "Jack Bean",
+    url: "www.beanstalk.com",
+  };
+
+  await api.post("/api/blogs").send(newBlogWoutTitle).expect(400);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
